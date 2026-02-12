@@ -1,14 +1,647 @@
 <!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="UTF-8">
-  <meta name="Generator" content="EditPlus®">
-  <meta name="Author" content="">
-  <meta name="Keywords" content="">
-  <meta name="Description" content="">
-  <title>Document</title>
- </head>
- <body>
-  Test
- </body>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Netzzi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #f0f3f8;
+    --bg2:      #ffffff;
+    --bg3:      #e8edf5;
+    --border:   rgba(0,0,0,0.08);
+    --border-h: rgba(0,0,0,0.18);
+    --text:     #3a4252;
+    --text-dim: #8a95a8;
+    --text-bright: #1a202e;
+    --accent1:  #2563eb;   /* blue  */
+    --accent2:  #059669;   /* green */
+    --accent3:  #d97706;   /* amber */
+    --accent4:  #7c3aed;   /* purple*/
+    --accent5:  #dc2626;   /* red   */
+    --glow1:    rgba(37,99,235,0.07);
+    --glow2:    rgba(5,150,105,0.07);
+    --glow3:    rgba(217,119,6,0.07);
+    --glow4:    rgba(124,58,237,0.07);
+    --radius:   10px;
+    --font:     'Noto Sans KR', 'Pretendard', sans-serif;
+    --mono:     'JetBrains Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 13px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Background Grid ───────────────────────── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 10% 0%, rgba(37,99,235,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 90% 100%, rgba(124,58,237,0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Layout ────────────────────────────────── */
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+  }
+
+  /* ── Header ────────────────────────────────── */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #1d3a6e 0%, #3b82f6 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 12px rgba(37,99,235,0.18);
+  }
+
+  .logo-text h1 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-bright);
+    letter-spacing: -0.3px;
+  }
+  .logo-text p {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 2px;
+    letter-spacing: 0.3px;
+  }
+
+  .clock-block {
+    text-align: right;
+  }
+  #clock {
+    font-family: var(--mono);
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--text-bright);
+    letter-spacing: 2px;
+  }
+  #date {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 3px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Section Headings ──────────────────────── */
+  .section {
+    margin-bottom: 28px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  /* ── Link Grid ─────────────────────────────── */
+  .grid {
+    display: grid;
+    gap: 8px;
+  }
+
+  .grid-5 { grid-template-columns: repeat(5, 1fr); }
+  .grid-7 { grid-template-columns: repeat(7, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+  @media (max-width: 1100px) {
+    .grid-7 { grid-template-columns: repeat(4, 1fr); }
+    .grid-5 { grid-template-columns: repeat(4, 1fr); }
+  }
+  @media (max-width: 760px) {
+    .grid-7, .grid-5, .grid-4, .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ── Link Card ─────────────────────────────── */
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.18s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  .link-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--card-glow, transparent);
+    opacity: 0;
+    transition: opacity 0.18s;
+  }
+
+  .link-card:hover {
+    border-color: var(--card-accent, var(--border-h));
+    background: var(--bg3);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.10), 0 0 0 1px var(--card-accent, transparent);
+    color: var(--text-bright);
+  }
+
+  .link-card:hover::before { opacity: 1; }
+
+  .card-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    flex-shrink: 0;
+    background: var(--card-icon-bg, rgba(0,0,0,0.05));
+  }
+
+  .card-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .card-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-bright);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-sub {
+    font-size: 10px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 1px;
+  }
+
+  /* ── Law Section ────────────────────────────── */
+  .law-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  @media (max-width: 760px) {
+    .law-grid { grid-template-columns: 1fr; }
+  }
+
+  .law-group {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  .law-group-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: rgba(0,0,0,0.03);
+    border-bottom: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.3px;
+  }
+
+  .law-group-title .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .law-list {
+    padding: 6px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .law-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 7px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.15s;
+    border: 1px solid transparent;
+  }
+
+  .law-item:hover {
+    background: var(--bg3);
+    border-color: var(--border-h);
+    color: var(--text-bright);
+    transform: translateX(3px);
+  }
+
+  .law-num {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--text-dim);
+    width: 16px;
+    flex-shrink: 0;
+  }
+
+  .law-name {
+    font-size: 12px;
+    font-weight: 400;
+    flex: 1;
+  }
+
+  .law-arrow {
+    font-size: 10px;
+    color: var(--text-dim);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .law-item:hover .law-arrow { opacity: 1; }
+
+  /* ── Accent color helpers ─── */
+  /* Favorite = blue */
+  .c-blue  { --card-accent: var(--accent1); --card-glow: var(--glow1); --card-icon-bg: rgba(37,99,235,0.09); }
+  /* AI = green */
+  .c-green { --card-accent: var(--accent2); --card-glow: var(--glow2); --card-icon-bg: rgba(5,150,105,0.09); }
+  /* Law personal = amber */
+  .c-amber { color: var(--accent3); }
+  /* Law security = purple */
+  .c-purple { color: var(--accent4); }
+
+  /* ── Animations ─────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .section {
+    animation: fadeUp 0.4s ease both;
+  }
+  .section:nth-child(1) { animation-delay: 0.05s; }
+  .section:nth-child(2) { animation-delay: 0.12s; }
+  .section:nth-child(3) { animation-delay: 0.19s; }
+  .section:nth-child(4) { animation-delay: 0.25s; }
+  header { animation: fadeUp 0.3s ease both; }
+
+  /* ── Scrollbar ───────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25); }
+
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- ─── HEADER ─── -->
+  <header>
+    <div class="header-left">
+      <div class="logo-icon">🖥️</div>
+      <div class="logo-text">
+        <h1>Netzzi</h1>
+        <p>Favorite</p>
+      </div>
+    </div>
+    <div class="clock-block">
+      <div id="clock">00:00:00</div>
+      <div id="date">--</div>
+    </div>
+  </header>
+
+  <!-- ─── FAVORITE ─── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label">Favorite</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="grid grid-5">
+
+      <a href="https://www.cje.ac.kr/" target="_blank" class="link-card c-blue">
+        <div class="card-icon">🏫</div>
+        <div class="card-text">
+          <span class="card-title">CJE 대학 홈페이지</span>
+          <span class="card-sub">cje.ac.kr</span>
+        </div>
+      </a>
+
+      <a href="https://zm935.mailplug.com/member/login?host_domain=cje.ac.kr" target="_blank" class="link-card c-blue">
+        <div class="card-icon">📧</div>
+        <div class="card-text">
+          <span class="card-title">대학 메일</span>
+          <span class="card-sub">MailPlug</span>
+        </div>
+      </a>
+
+      <a href="https://mail.google.com/mail/u/0/#search/is%3Aunread" target="_blank" class="link-card c-blue">
+        <div class="card-icon">📩</div>
+        <div class="card-text">
+          <span class="card-title">Gmail</span>
+          <span class="card-sub">gmail.com</span>
+        </div>
+      </a>
+
+      <a href="https://calendar.google.com/" target="_blank" class="link-card c-blue">
+        <div class="card-icon">📅</div>
+        <div class="card-text">
+          <span class="card-title">Google 캘린더</span>
+          <span class="card-sub">calendar.google.com</span>
+        </div>
+      </a>
+
+      <a href="https://cje.korus.ac.kr/" target="_blank" class="link-card c-blue">
+        <div class="card-icon">🏛️</div>
+        <div class="card-text">
+          <span class="card-title">KORUS 포털</span>
+          <span class="card-sub">cje.korus.ac.kr</span>
+        </div>
+      </a>
+
+      <a href="https://www.notion.so/netzzi/bdf910f1e6b74d6791dd05c47456915d?v=0299cebafc2d402bb57ced6cdbb22698" target="_blank" class="link-card c-blue">
+        <div class="card-icon">📝</div>
+        <div class="card-text">
+          <span class="card-title">Notion</span>
+          <span class="card-sub">노트</span>
+        </div>
+      </a>
+
+      <a href="https://feedly.com/i/my/me" target="_blank" class="link-card c-blue">
+        <div class="card-icon">📰</div>
+        <div class="card-text">
+          <span class="card-title">Feedly</span>
+          <span class="card-sub">뉴스 피드</span>
+        </div>
+      </a>
+
+      <a href="https://www.naver.com/" target="_blank" class="link-card c-blue">
+        <div class="card-icon">🔍</div>
+        <div class="card-text">
+          <span class="card-title">네이버</span>
+          <span class="card-sub">naver.com</span>
+        </div>
+      </a>
+
+      <a href="https://www.daum.net/" target="_blank" class="link-card c-blue">
+        <div class="card-icon">🌐</div>
+        <div class="card-text">
+          <span class="card-title">다음</span>
+          <span class="card-sub">daum.net</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ─── AI ─── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label">AI Tools</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="grid grid-7">
+
+      <a href="https://chatgpt.com/" target="_blank" class="link-card c-green">
+        <div class="card-icon">🤖</div>
+        <div class="card-text">
+          <span class="card-title">ChatGPT</span>
+          <span class="card-sub">OpenAI</span>
+        </div>
+      </a>
+
+      <a href="https://claude.ai/" target="_blank" class="link-card c-green">
+        <div class="card-icon">✦</div>
+        <div class="card-text">
+          <span class="card-title">Claude</span>
+          <span class="card-sub">Anthropic</span>
+        </div>
+      </a>
+
+      <a href="https://gemini.google.com/app" target="_blank" class="link-card c-green">
+        <div class="card-icon">♊</div>
+        <div class="card-text">
+          <span class="card-title">Gemini</span>
+          <span class="card-sub">Google</span>
+        </div>
+      </a>
+
+      <a href="https://copilot.microsoft.com/" target="_blank" class="link-card c-green">
+        <div class="card-icon">🪟</div>
+        <div class="card-text">
+          <span class="card-title">Copilot</span>
+          <span class="card-sub">Microsoft</span>
+        </div>
+      </a>
+
+      <a href="https://www.perplexity.ai/" target="_blank" class="link-card c-green">
+        <div class="card-icon">🔭</div>
+        <div class="card-text">
+          <span class="card-title">Perplexity</span>
+          <span class="card-sub">AI 검색</span>
+        </div>
+      </a>
+
+      <a href="https://grok.com/" target="_blank" class="link-card c-green">
+        <div class="card-icon">⚡</div>
+        <div class="card-text">
+          <span class="card-title">Grok</span>
+          <span class="card-sub">xAI</span>
+        </div>
+      </a>
+
+      <a href="https://adot.ai/search/" target="_blank" class="link-card c-green">
+        <div class="card-icon">🔮</div>
+        <div class="card-text">
+          <span class="card-title">Adot AI</span>
+          <span class="card-sub">국내 AI 검색</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ─── 법령·지침 ─── -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-label">법령 · 지침</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="law-grid">
+
+      <!-- 개인정보 보호법 -->
+      <div class="law-group">
+        <div class="law-group-title">
+          <span class="dot" style="background:#f59e0b;"></span>
+          개인정보 보호법
+        </div>
+        <div class="law-list">
+
+          <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%EB%B2%95" target="_blank" class="law-item">
+            <span class="law-num">01</span>
+            <span class="law-name">개인정보 보호법</span>
+            <span class="law-arrow">→</span>
+          </a>
+
+          <a href="https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%EB%B2%95%EC%8B%9C%ED%96%89%EB%A0%B9" target="_blank" class="law-item">
+            <span class="law-num">02</span>
+            <span class="law-name">개인정보 보호법 시행령</span>
+            <span class="law-arrow">→</span>
+          </a>
+
+          <a href="https://www.law.go.kr/%ED%96%89%EC%A0%95%EA%B7%9C%EC%B9%99/%ED%91%9C%EC%A4%80%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%EC%A7%80%EC%B9%A8" target="_blank" class="law-item">
+            <span class="law-num">03</span>
+            <span class="law-name">표준개인정보 보호지침</span>
+            <span class="law-arrow">→</span>
+          </a>
+
+          <a href="https://www.law.go.kr/%ED%96%89%EC%A0%95%EA%B7%9C%EC%B9%99/%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EC%9D%98%EC%95%88%EC%A0%84%EC%84%B1%ED%99%95%EB%B3%B4%EC%A1%B0%EC%B9%98%EA%B8%B0%EC%A4%80" target="_blank" class="law-item">
+            <span class="law-num">04</span>
+            <span class="law-name">개인정보 안전성 확보조치 기준</span>
+            <span class="law-arrow">→</span>
+          </a>
+
+          <a href="https://www.law.go.kr/%ED%96%89%EC%A0%95%EA%B7%9C%EC%B9%99/%EA%B5%90%EC%9C%A1%EB%B6%80%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EB%B3%B4%ED%98%B8%EC%A7%80%EC%B9%A8/" target="_blank" class="law-item">
+            <span class="law-num">05</span>
+            <span class="law-name">교육부 개인정보보호지침</span>
+            <span class="law-arrow">→</span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- 교육부 정보보안 -->
+      <div class="law-group">
+        <div class="law-group-title">
+          <span class="dot" style="background:#8b5cf6;"></span>
+          정보보호
+        </div>
+        <div class="law-list">
+
+          <a href="https://www.law.go.kr/%ED%96%89%EC%A0%95%EA%B7%9C%EC%B9%99/%EA%B5%90%EC%9C%A1%EB%B6%80%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EB%B3%B8%EC%A7%80%EC%B9%A8/" target="_blank" class="law-item">
+            <span class="law-num">01</span>
+            <span class="law-name">교육부 정보보안 기본지침</span>
+            <span class="law-arrow">→</span>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function updateClock() {
+    const now = new Date();
+    const H = String(now.getHours()).padStart(2,'0');
+    const M = String(now.getMinutes()).padStart(2,'0');
+    const S = String(now.getSeconds()).padStart(2,'0');
+    document.getElementById('clock').textContent = `${H}:${M}:${S}`;
+
+    const days = ['일','월','화','수','목','금','토'];
+    const y = now.getFullYear();
+    const m = now.getMonth()+1;
+    const d = now.getDate();
+    const w = days[now.getDay()];
+    document.getElementById('date').textContent = `${y}년 ${m}월 ${d}일 (${w})`;
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>
+</body>
 </html>
