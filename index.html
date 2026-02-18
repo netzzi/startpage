@@ -244,6 +244,28 @@
     font-weight: 400;
   }
 
+  /* 단축키 배지 */
+  .kbd-badge {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-dim);
+    background: rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.10);
+    border-radius: 5px;
+    padding: 2px 6px;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .link-card:hover .kbd-badge {
+    background: rgba(37,99,235,0.10);
+    border-color: rgba(37,99,235,0.25);
+    color: var(--accent1);
+  }
+
   /* Law Section */
   .law-grid {
     display: grid;
@@ -335,6 +357,50 @@
   }
   .law-item:hover .law-arrow { opacity: 1; }
 
+  /* law-item 단축키 배지 */
+  .law-kbd {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-dim);
+    background: rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.10);
+    border-radius: 5px;
+    padding: 2px 6px;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+    transition: background 0.15s, color 0.15s;
+  }
+  .law-item:hover .law-kbd {
+    background: rgba(124,58,237,0.10);
+    border-color: rgba(124,58,237,0.25);
+    color: var(--accent4);
+  }
+
+  /* 단축키 토스트 알림 */
+  #kbd-toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background: rgba(17,24,39,0.88);
+    color: #f9fafb;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 9px 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+    z-index: 9999;
+    white-space: nowrap;
+  }
+  #kbd-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
   /* Accent helpers */
   .c-blue  { --card-accent: var(--accent1); --card-glow: var(--glow1); --card-icon-bg: rgba(37,99,235,0.09); }
   .c-green { --card-accent: var(--accent2); --card-glow: var(--glow2); --card-icon-bg: rgba(5,150,105,0.09); }
@@ -389,6 +455,7 @@
           <span class="card-title">대학 홈페이지</span>
           <span class="card-sub">cje.ac.kr</span>
         </div>
+        <span class="kbd-badge">C</span>
       </a>
 
       <a href="https://zm935.mailplug.com/member/login?host_domain=cje.ac.kr" target="_blank" class="link-card c-blue">
@@ -397,6 +464,7 @@
           <span class="card-title">대학 메일</span>
           <span class="card-sub">MailPlug</span>
         </div>
+        <span class="kbd-badge">M</span>
       </a>
 
       <a href="https://mail.google.com/mail/u/0/#search/is%3Aunread" target="_blank" class="link-card c-blue">
@@ -405,6 +473,7 @@
           <span class="card-title">Gmail</span>
           <span class="card-sub">gmail.com</span>
         </div>
+        <span class="kbd-badge">G</span>
       </a>
 
       <a href="https://calendar.google.com/" target="_blank" class="link-card c-blue">
@@ -413,6 +482,7 @@
           <span class="card-title">Google 캘린더</span>
           <span class="card-sub">calendar.google.com</span>
         </div>
+        <span class="kbd-badge">L</span>
       </a>
 
       <a href="https://www.notion.so/netzzi/bdf910f1e6b74d6791dd05c47456915d?v=0299cebafc2d402bb57ced6cdbb22698" target="_blank" class="link-card c-blue">
@@ -421,6 +491,7 @@
           <span class="card-title">Notion</span>
           <span class="card-sub">노트</span>
         </div>
+        <span class="kbd-badge">N</span>
       </a>
       
       <a href="https://cje.korus.ac.kr/" target="_blank" class="link-card c-blue">
@@ -429,6 +500,7 @@
           <span class="card-title">KORUS</span>
           <span class="card-sub">국립대학자원관리시스템</span>
         </div>
+        <span class="kbd-badge">K</span>
       </a>
       
       <a href="https://cje.koedu.ac.kr/" target="_blank" class="link-card c-blue">
@@ -437,6 +509,7 @@
           <span class="card-title">KOEDU</span>
           <span class="card-sub">학사정보시스템</span>
         </div>
+        <span class="kbd-badge">E</span>
       </a>
 
       <a href="https://feedly.com/i/my/me" target="_blank" class="link-card c-blue">
@@ -445,6 +518,7 @@
           <span class="card-title">Feedly</span>
           <span class="card-sub">뉴스 피드</span>
         </div>
+        <span class="kbd-badge">F</span>
       </a>
       
       <a href="https://www.daum.net/" target="_blank" class="link-card c-blue">
@@ -453,6 +527,7 @@
           <span class="card-title">다음</span>
           <span class="card-sub">daum.net</span>
         </div>
+        <span class="kbd-badge">D</span>
       </a>
 
       <a href="https://www.naver.com/" target="_blank" class="link-card c-blue">
@@ -461,8 +536,8 @@
           <span class="card-title">네이버</span>
           <span class="card-sub">naver.com</span>
         </div>
+        <span class="kbd-badge">R</span>
       </a>
-
 
     </div>
   </div>
@@ -481,6 +556,7 @@
           <span class="card-title">ChatGPT</span>
           <span class="card-sub">OpenAI</span>
         </div>
+        <span class="kbd-badge">A</span>
       </a>
 
       <a href="https://claude.ai/" target="_blank" class="link-card c-green">
@@ -489,6 +565,7 @@
           <span class="card-title">Claude</span>
           <span class="card-sub">Anthropic</span>
         </div>
+        <span class="kbd-badge">A</span>
       </a>
 
       <a href="https://gemini.google.com/app" target="_blank" class="link-card c-green">
@@ -497,6 +574,7 @@
           <span class="card-title">Gemini</span>
           <span class="card-sub">Google</span>
         </div>
+        <span class="kbd-badge">A</span>
       </a>
 
       <a href="https://copilot.microsoft.com/" target="_blank" class="link-card c-green">
@@ -505,6 +583,7 @@
           <span class="card-title">Copilot</span>
           <span class="card-sub">Microsoft</span>
         </div>
+        <span class="kbd-badge">A</span>
       </a>
 
       <a href="https://www.perplexity.ai/" target="_blank" class="link-card c-green">
@@ -513,6 +592,7 @@
           <span class="card-title">Perplexity</span>
           <span class="card-sub">Perplexity AI</span>
         </div>
+        <span class="kbd-badge">A</span>
       </a>
 
       <a href="https://grok.com/" target="_blank" class="link-card c-green">
@@ -521,6 +601,7 @@
           <span class="card-title">Grok</span>
           <span class="card-sub">xAI</span>
         </div>
+        <span class="kbd-badge">A</span>
       </a>
 
       <a href="https://adot.ai/search/" target="_blank" class="link-card c-green">
@@ -529,6 +610,7 @@
           <span class="card-title">Adot</span>
           <span class="card-sub">에이닷</span>
         </div>
+        <span class="kbd-badge">A</span>
       </a>
 
     </div>
@@ -585,6 +667,7 @@
           <a href="https://www.law.go.kr/%ED%96%89%EC%A0%95%EA%B7%9C%EC%B9%99/%EA%B5%90%EC%9C%A1%EB%B6%80%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EB%B3%B8%EC%A7%80%EC%B9%A8/" target="_blank" class="law-item">
             <span class="law-num">01</span>
             <span class="law-name">교육부 정보보안 기본지침</span>
+            <span class="law-kbd">S</span>
             <span class="law-arrow">→</span>
           </a>
           <a href="https://cyber.ecsc.go.kr/" target="_blank" class="law-item">
@@ -615,6 +698,9 @@
 
 </div>
 
+<!-- 단축키 토스트 -->
+<div id="kbd-toast"></div>
+
 <script>
   function updateClock() {
     const now = new Date();
@@ -631,6 +717,67 @@
   }
   updateClock();
   setInterval(updateClock, 1000);
+
+  // ── 키보드 단축키 ──────────────────────────────────────────
+  const shortcuts = {
+    'c': { url: 'https://www.cje.ac.kr/',                                                                                      label: '대학 홈페이지' },
+    'm': { url: 'https://zm935.mailplug.com/member/login?host_domain=cje.ac.kr',                                              label: '대학 메일' },
+    'g': { url: 'https://mail.google.com/mail/u/0/#search/is%3Aunread',                                                       label: 'Gmail' },
+    'l': { url: 'https://calendar.google.com/',                                                                                label: 'Google 캘린더' },
+    'n': { url: 'https://www.notion.so/netzzi/bdf910f1e6b74d6791dd05c47456915d?v=0299cebafc2d402bb57ced6cdbb22698',           label: 'Notion' },
+    'k': { url: 'https://cje.korus.ac.kr/',                                                                                   label: 'KORUS' },
+    'e': { url: 'https://cje.koedu.ac.kr/',                                                                                   label: 'KOEDU' },
+    'f': { url: 'https://feedly.com/i/my/me',                                                                                 label: 'Feedly' },
+    'd': { url: 'https://www.daum.net/',                                                                                      label: '다음' },
+    'r': { url: 'https://www.naver.com/',                                                                                     label: '네이버' },
+    's': { url: 'https://www.law.go.kr/%ED%96%89%EC%A0%95%EA%B7%9C%EC%B9%99/%EA%B5%90%EC%9C%A1%EB%B6%80%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EB%B3%B8%EC%A7%80%EC%B9%A8/', label: '교육부 정보보안 기본지침' }
+  };
+
+  const multiShortcuts = {
+    'a': {
+      urls: [
+        'https://chatgpt.com/',
+        'https://claude.ai/',
+        'https://gemini.google.com/app',
+        'https://copilot.microsoft.com/',
+        'https://www.perplexity.ai/',
+        'https://grok.com/',
+        'https://adot.ai/search/'
+      ],
+      label: 'AI Tools (7개 탭)'
+    }
+  };
+
+  let toastTimer = null;
+  const toast = document.getElementById('kbd-toast');
+
+  function showToast(key, label) {
+    toast.textContent = key.toUpperCase() + '  →  ' + label;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 1400);
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName)) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const key = e.key.toLowerCase();
+
+    // 단일 URL 단축키
+    const target = shortcuts[key];
+    if (target) {
+      window.open(target.url, '_blank');
+      showToast(key, target.label);
+      return;
+    }
+
+    // 다중 URL 단축키
+    const multi = multiShortcuts[key];
+    if (multi) {
+      multi.urls.forEach(url => window.open(url, '_blank'));
+      showToast(key, multi.label);
+    }
+  });
 </script>
 </body>
 </html>
