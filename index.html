@@ -556,15 +556,6 @@
         </div>
         <span class="kbd-badge">T</span>
       </a>
-      
-      <a href="https://www.perplexity.ai/" target="_self" class="link-card c-blue">
-        <div class="card-icon">💻</div>
-        <div class="card-text">
-          <span class="card-title">Perplexity</span>
-          <span class="card-sub">Perplexity AI</span>
-        </div>
-        <span class="kbd-badge">P</span>
-      </a>
 
       <a href="https://lms.cje.ac.kr/" target="_self" class="link-card c-blue">
         <div class="card-icon">🏛️</div>
@@ -574,6 +565,15 @@
         </div>
         <span class="kbd-badge">L</span>
       </a>
+
+      <a href="https://keep.google.com/" target="_self" class="link-card c-blue">
+        <div class="card-icon">📒</div>
+        <div class="card-text">
+          <span class="card-title">Keep</span>
+          <span class="card-sub">Google Keep</span>
+        </div>
+        <span class="kbd-badge">V</span>
+      </a>      
 
     </div>
   </div>
@@ -592,7 +592,7 @@
           <span class="card-title">ChatGPT</span>
           <span class="card-sub">OpenAI</span>
         </div>
-        <span class="kbd-badge">A</span>
+        <span class="kbd-badge">H</span>
       </a>
 
       <a href="https://claude.ai/" target="_self" class="link-card c-green">
@@ -601,7 +601,7 @@
           <span class="card-title">Claude</span>
           <span class="card-sub">Anthropic</span>
         </div>
-        <span class="kbd-badge">A</span>
+        <span class="kbd-badge">W</span>
       </a>
 
       <a href="https://gemini.google.com/app" target="_self" class="link-card c-green">
@@ -610,7 +610,7 @@
           <span class="card-title">Gemini</span>
           <span class="card-sub">Google</span>
         </div>
-        <span class="kbd-badge">A</span>
+        <span class="kbd-badge">J</span>
       </a>
 
       <a href="https://copilot.microsoft.com/" target="_self" class="link-card c-green">
@@ -619,7 +619,7 @@
           <span class="card-title">Copilot</span>
           <span class="card-sub">Microsoft</span>
         </div>
-        <span class="kbd-badge">A</span>
+        <span class="kbd-badge">I</span>
       </a>
 
       <a href="https://www.perplexity.ai/" target="_self" class="link-card c-green">
@@ -628,7 +628,7 @@
           <span class="card-title">Perplexity</span>
           <span class="card-sub">Perplexity AI</span>
         </div>
-        <span class="kbd-badge">A</span>
+        <span class="kbd-badge">P</span>
       </a>
 
       <a href="https://grok.com/" target="_self" class="link-card c-green">
@@ -637,7 +637,7 @@
           <span class="card-title">Grok</span>
           <span class="card-sub">xAI</span>
         </div>
-        <span class="kbd-badge">A</span>
+        <span class="kbd-badge">X</span>
       </a>
 
       <a href="https://adot.ai/search/" target="_self" class="link-card c-green">
@@ -646,7 +646,7 @@
           <span class="card-title">Adot</span>
           <span class="card-sub">에이닷</span>
         </div>
-        <span class="kbd-badge">A</span>
+        <span class="kbd-badge">Z</span>
       </a>
 
     </div>
@@ -757,21 +757,28 @@
 
   // ── 키보드 단축키 ──────────────────────────────────────────
   const shortcuts = {
-    'c': { url: 'https://www.cje.ac.kr/',                                                                                     label: '대학 홈페이지' },
-    'm': { url: 'https://zm935.mailplug.com/member/login?host_domain=cje.ac.kr',                                              label: '대학 메일' },
-    'g': { url: 'https://mail.google.com/mail/u/0/#search/is%3Aunread',                                                       label: 'Gmail' },
-    'o': { url: 'https://calendar.google.com/',                                                                               label: 'Google 캘린더' },
-    'l': { url: 'https://lms.cje.ac.kr/',                                                                                     label: '학습관리시스템' },
-    'n': { url: 'https://www.notion.so/netzzi/bdf910f1e6b74d6791dd05c47456915d?v=0299cebafc2d402bb57ced6cdbb22698',           label: 'Notion' },
-    'k': { url: 'https://cje.korus.ac.kr/',                                                                                   label: 'KORUS' },
-    'e': { url: 'https://cje.koedu.ac.kr/',                                                                                   label: 'KOEDU' },
-    'f': { url: 'https://feedly.com/i/my/me',                                                                                 label: 'Feedly' },
-    'd': { url: 'https://www.daum.net/',                                                                                      label: '다음' },
-    'r': { url: 'https://www.naver.com/',                                                                                     label: '네이버' },
-    'y': { url: 'https://www.youtube.com/',                                                                                   label: 'Youtube' },	
-    't': { url: 'https://trends.google.co.kr/trending?geo=KR',                                                                label: 'Google 인기 검색어' },	
-    'p': { url: 'https://www.perplexity.ai/',                                                                                 label: 'Perplexity' },	
-    'u': { url: 'https://www.cje.ac.kr/info/multiurls_cje.html',                                                              label: 'Open Multiple URLs' },	
+    'c': { url: 'https://www.cje.ac.kr/', label: '대학 홈페이지' },
+    'm': { url: 'https://zm935.mailplug.com/member/login?host_domain=cje.ac.kr',  label: '대학 메일' },
+    'g': { url: 'https://mail.google.com/mail/u/0/#search/is%3Aunread', label: 'Gmail' },
+    'o': { url: 'https://calendar.google.com/', label: 'Google 캘린더' },
+    'l': { url: 'https://lms.cje.ac.kr/', label: '학습관리시스템' },
+    'n': { url: 'https://www.notion.so/netzzi/bdf910f1e6b74d6791dd05c47456915d?v=0299cebafc2d402bb57ced6cdbb22698', label: 'Notion' },
+    'k': { url: 'https://cje.korus.ac.kr/', label: 'KORUS' },
+    'e': { url: 'https://cje.koedu.ac.kr/', label: 'KOEDU' },
+    'f': { url: 'https://feedly.com/i/my/me', label: 'Feedly' },
+    'd': { url: 'https://www.daum.net/', label: '다음' },
+    'r': { url: 'https://www.naver.com/', label: '네이버' },
+    'y': { url: 'https://www.youtube.com/', label: 'Youtube' },	
+    't': { url: 'https://trends.google.co.kr/trending?geo=KR', label: 'Google 인기 검색어' },	
+    'p': { url: 'https://www.perplexity.ai/', label: 'Perplexity' },	
+    'h': { url: 'https://chatgpt.com/', label: 'ChatGPT' },	
+    'w': { url: 'https://claude.ai/', label: 'Claude' },	
+    'j': { url: 'https://gemini.google.com/', label: 'Gemini' },	
+    'i': { url: 'https://copilot.microsoft.com/', label: 'Copilot' },	
+    'x': { url: 'https://grok.com/', label: 'Grok' },	
+    'z': { url: 'https://adot.ai/search/', label: 'Adot' },	
+    'v': { url: 'https://keep.google.com/', label: 'Keep' },	
+    'u': { url: 'https://www.cje.ac.kr/info/multiurls_cje.html', label: 'Open Multiple URLs' },	
     's': { url: 'https://www.law.go.kr/%ED%96%89%EC%A0%95%EA%B7%9C%EC%B9%99/%EA%B5%90%EC%9C%A1%EB%B6%80%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88%EA%B8%B0%EB%B3%B8%EC%A7%80%EC%B9%A8/', label: '교육부 정보보안 기본지침' }
   };
 
@@ -787,7 +794,20 @@
         'https://adot.ai/search/'
       ],
       label: 'AI Tools (7개 탭)'
-    }
+    },
+    'q': {
+      urls: [
+        'https://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu&category=4',
+        'https://www.ppomppu.co.kr/zboard/zboard.php?id=ppomppu&category=5',
+        'https://www.clien.net/service/board/jirum',
+        'https://www.fmkorea.com/hotdeal',
+        'https://quasarzone.com/bbs/qb_saleinfo',
+        'https://bbs.ruliweb.com/market/board/1020',
+        'https://arca.live/b/hotdeal',
+        'https://retrodb.info/deal'
+      ],
+      label: 'AI Tools (7개 탭)'
+    }    
   };
 
   let toastTimer = null;
